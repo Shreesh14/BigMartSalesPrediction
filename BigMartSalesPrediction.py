@@ -191,46 +191,12 @@ print('R Squared value = ', r2_test)
 model= regressor
 
 import pickle
-
-"""## Saving the Model"""
-
-with open('big_mart_sales_model.pkl', 'wb') as file:
-    pickle.dump(model, file)
-print("Model saved as 'big_mart_sales_model.pkl'")
-
-# Create and save encoders for each categorical feature
-item_fat_content_encoder = LabelEncoder().fit(big_mart_data['Item_Fat_Content'])
-item_type_encoder = LabelEncoder().fit(big_mart_data['Item_Type'])
-outlet_identifier_encoder = LabelEncoder().fit(big_mart_data['Outlet_Identifier'])
-outlet_size_encoder = LabelEncoder().fit(big_mart_data['Outlet_Size'])
-outlet_location_type_encoder = LabelEncoder().fit(big_mart_data['Outlet_Location_Type'])
-outlet_type_encoder = LabelEncoder().fit(big_mart_data['Outlet_Type'])
-
-# Saving each encoder to a .pkl file
-with open('item_fat_content_encoder.pkl', 'wb') as file:
-    pickle.dump(item_fat_content_encoder, file)
-
-with open('item_type_encoder.pkl', 'wb') as file:
-    pickle.dump(item_type_encoder, file)
-
-with open('outlet_identifier_encoder.pkl', 'wb') as file:
-    pickle.dump(outlet_identifier_encoder, file)
-
-with open('outlet_size_encoder.pkl', 'wb') as file:
-    pickle.dump(outlet_size_encoder, file)
-
-with open('outlet_location_type_encoder.pkl', 'wb') as file:
-    pickle.dump(outlet_location_type_encoder, file)
-
-with open('outlet_type_encoder.pkl', 'wb') as file:
-    pickle.dump(outlet_type_encoder, file)
-
-print("Encoders saved successfully.")
-
+import streamlit as st
+# Load the trained model
 with open('big_mart_sales_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-import streamlit as st
+# Load each encoder
 with open('item_fat_content_encoder.pkl', 'rb') as file:
     item_fat_content_encoder = pickle.load(file)
 with open('item_type_encoder.pkl', 'rb') as file:
@@ -244,22 +210,22 @@ with open('outlet_location_type_encoder.pkl', 'rb') as file:
 with open('outlet_type_encoder.pkl', 'rb') as file:
     outlet_type_encoder = pickle.load(file)
 
-# Collect user inputs
+# Streamlit app
 st.title("Big Mart Sales Prediction")
 
-# Replace with actual feature names and appropriate input types
+# Collect user inputs
 item_weight = st.number_input("Item Weight", min_value=0.0, step=0.1)
-item_fat_content = st.selectbox("Item Fat Content", item_fat_content_encoder.classes_)
+item_fat_content = st.selectbox("Item Fat Content", item_fat_content_encoder.inverse_transform(range(len(item_fat_content_encoder.classes_))))
 item_visibility = st.number_input("Item Visibility", min_value=0.0, max_value=1.0, step=0.01)
-item_type = st.selectbox("Item Type", item_type_encoder.classes_)
+item_type = st.selectbox("Item Type", item_type_encoder.inverse_transform(range(len(item_type_encoder.classes_))))
 item_mrp = st.number_input("Item MRP", min_value=0.0, step=0.1)
-outlet_identifier = st.selectbox("Outlet Identifier", outlet_identifier_encoder.classes_)
+outlet_identifier = st.selectbox("Outlet Identifier", outlet_identifier_encoder.inverse_transform(range(len(outlet_identifier_encoder.classes_))))
 outlet_establishment_year = st.number_input("Outlet Establishment Year", min_value=1985, step=1)
-outlet_size = st.selectbox("Outlet Size", outlet_size_encoder.classes_)
-outlet_location_type = st.selectbox("Outlet Location Type", outlet_location_type_encoder.classes_)
-outlet_type = st.selectbox("Outlet Type", outlet_type_encoder.classes_)
+outlet_size = st.selectbox("Outlet Size", outlet_size_encoder.inverse_transform(range(len(outlet_size_encoder.classes_))))
+outlet_location_type = st.selectbox("Outlet Location Type", outlet_location_type_encoder.inverse_transform(range(len(outlet_location_type_encoder.classes_))))
+outlet_type = st.selectbox("Outlet Type", outlet_type_encoder.inverse_transform(range(len(outlet_type_encoder.classes_))))
 
-# Create a DataFrame or dictionary for input data
+# Create a DataFrame for input data
 input_data = pd.DataFrame({
     'Item_Weight': [item_weight],
     'Item_Fat_Content': [item_fat_content],
@@ -273,7 +239,7 @@ input_data = pd.DataFrame({
     'Outlet_Type': [outlet_type]
 })
 
-# Encode the categorical inputs
+# Encode categorical inputs
 input_data['Item_Fat_Content'] = item_fat_content_encoder.transform(input_data['Item_Fat_Content'])
 input_data['Item_Type'] = item_type_encoder.transform(input_data['Item_Type'])
 input_data['Outlet_Identifier'] = outlet_identifier_encoder.transform(input_data['Outlet_Identifier'])
