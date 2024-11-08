@@ -216,15 +216,15 @@ st.title("Big Mart Sales Prediction")
 
 # Collect user inputs
 item_weight = st.number_input("Item Weight", min_value=0.0, step=0.1)
-item_fat_content = st.selectbox("Item Fat Content", item_fat_content_encoder.inverse_transform(range(len(item_fat_content_encoder.classes_))))
+item_fat_content = st.selectbox("Item Fat Content", list(item_fat_content_encoder.inverse_transform(range(len(item_fat_content_encoder.classes_)))))
 item_visibility = st.number_input("Item Visibility", min_value=0.0, max_value=1.0, step=0.01)
-item_type = st.selectbox("Item Type", item_type_encoder.inverse_transform(range(len(item_type_encoder.classes_))))
+item_type = st.selectbox("Item Type", list(item_type_encoder.inverse_transform(range(len(item_type_encoder.classes_)))))
 item_mrp = st.number_input("Item MRP", min_value=0.0, step=0.1)
-outlet_identifier = st.selectbox("Outlet Identifier", outlet_identifier_encoder.inverse_transform(range(len(outlet_identifier_encoder.classes_))))
+outlet_identifier = st.selectbox("Outlet Identifier", list(outlet_identifier_encoder.inverse_transform(range(len(outlet_identifier_encoder.classes_)))))
 outlet_establishment_year = st.number_input("Outlet Establishment Year", min_value=1985, step=1)
-outlet_size = st.selectbox("Outlet Size", outlet_size_encoder.inverse_transform(range(len(outlet_size_encoder.classes_))))
-outlet_location_type = st.selectbox("Outlet Location Type", outlet_location_type_encoder.inverse_transform(range(len(outlet_location_type_encoder.classes_))))
-outlet_type = st.selectbox("Outlet Type", outlet_type_encoder.inverse_transform(range(len(outlet_type_encoder.classes_))))
+outlet_size = st.selectbox("Outlet Size", list(outlet_size_encoder.inverse_transform(range(len(outlet_size_encoder.classes_)))))
+outlet_location_type = st.selectbox("Outlet Location Type", list(outlet_location_type_encoder.inverse_transform(range(len(outlet_location_type_encoder.classes_)))))
+outlet_type = st.selectbox("Outlet Type", list(outlet_type_encoder.inverse_transform(range(len(outlet_type_encoder.classes_)))))
 
 # Create a DataFrame for input data
 input_data = pd.DataFrame({
