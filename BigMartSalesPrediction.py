@@ -11,7 +11,7 @@ from sklearn import metrics
 """Data Collection and Processing"""
 
 # loading the data from csv file to Pandas DataFrame
-big_mart_data = pd.read_csv(r'C:\Users\Admin\OneDrive\Desktop\Big Mart Sales Prediction\Train.csv')
+big_mart_data = pd.read_csv(r'Train.csv')
 
 
 # first 5 rows of the dataframe
