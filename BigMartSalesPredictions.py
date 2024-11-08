@@ -215,6 +215,7 @@ with open('outlet_type_encoder.pkl', 'rb') as file:
 st.title("Big Mart Sales Prediction")
 
 # Collect user inputs
+# Collect user inputs
 item_weight = st.number_input("Item Weight", min_value=0.0, step=0.1)
 item_fat_content = st.selectbox("Item Fat Content", list(item_fat_content_encoder.inverse_transform(range(len(item_fat_content_encoder.classes_)))))
 item_visibility = st.number_input("Item Visibility", min_value=0.0, max_value=1.0, step=0.01)
