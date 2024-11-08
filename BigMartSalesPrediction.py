@@ -192,6 +192,7 @@ model= regressor
 
 import pickle
 import streamlit as st
+
 # Load the trained model
 with open('big_mart_sales_model.pkl', 'rb') as file:
     model = pickle.load(file)
