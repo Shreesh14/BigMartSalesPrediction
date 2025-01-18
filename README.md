@@ -14,3 +14,5 @@ Random Forest
 Gradient Boosting
 #Model Evaluation: We evaluate models based on metrics like RMSE (Root Mean Squared Error) and R² Score, and select the model with the best performance.
 Deployment: The project is deployed using Streamlit to provide an interactive web interface where users can input product and store details to predict sales.
+
+Hope this project helped you!
