@@ -16,3 +16,5 @@ Gradient Boosting
 Deployment: The project is deployed using Streamlit to provide an interactive web interface where users can input product and store details to predict sales.
 <br>
 Hope this project helped you! <br>Thank You
+
+<br> Author : Shreesh Divyam Sinha </br>
